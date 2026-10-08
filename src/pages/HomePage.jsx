@@ -81,7 +81,7 @@ export default function HomePage() {
       </section>
 
       {/* ── DIVISIONS ─────────────────────────────────────────────────── */}
-      <section className="divisions section-padding section-navy" aria-labelledby="divisions-heading">
+      <section className="divisions section-padding section-white" aria-labelledby="divisions-heading">
         <div className="container">
           <SectionHeader
             id="divisions-heading"
@@ -141,35 +141,53 @@ export default function HomePage() {
       <section className="featured-projects section-padding section-navy" aria-labelledby="featured-projects-heading">
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: 'var(--space-8)' }}>
-            <span className="eyebrow eyebrow--tech" style={{ marginBottom: 'var(--space-2)' }}>In Development</span>
+            <span className="eyebrow eyebrow--tech" style={{ marginBottom: 'var(--space-2)' }}>Verified Portfolio</span>
             <h2 id="featured-projects-heading" style={{ fontSize: 'var(--text-4xl)' }}>Featured Projects</h2>
           </div>
           
           <div className="grid-2">
             {featuredProjects.map(project => (
               <article key={project.id} className="project-card" data-division={project.division}>
-                <div className="project-image">
-                  <img src={project.image} alt={project.title} loading="lazy" />
-                  <div className="project-status">
-                    <span className="status-dot"></span>
+                <div className="project-image" style={{ position: 'relative', aspectRatio: '16/10', overflow: 'hidden', background: '#0f172a' }}>
+                  <img src={project.image} alt={project.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <div className="project-status" style={{ position: 'absolute', top: 'var(--space-3)', left: 'var(--space-3)', background: 'rgba(15, 27, 46, 0.88)', backdropFilter: 'blur(6px)', color: 'var(--color-white)', padding: '0.25rem 0.75rem', borderRadius: 'var(--radius-pill)', fontSize: 'var(--text-xs)', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                    <span 
+                      style={{ 
+                        width: '6px', 
+                        height: '6px', 
+                        borderRadius: '50%', 
+                        background: project.status.toLowerCase().includes('progress') ? '#f59e0b' : '#10b981',
+                        boxShadow: project.status.toLowerCase().includes('progress') ? '0 0 6px rgba(245, 158, 11, 0.7)' : '0 0 6px rgba(16, 185, 129, 0.7)'
+                      }} 
+                    />
                     {project.status}
                   </div>
                 </div>
-                <div className="project-info">
-                  <div className={`project-division badge badge--${project.division === 'tech' ? 'tech' : 'construction'}`}>
-                    {project.division === 'tech' ? 'Technology' : 'Construction'}
+                <div className="project-info" style={{ padding: 'var(--space-5)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-2)' }}>
+                    <div className={`project-division badge badge--${project.division === 'tech' ? 'tech' : 'construction'}`}>
+                      {project.division === 'tech' ? 'Technology' : 'Construction'}
+                    </div>
+                    <span style={{ fontSize: 'var(--text-xs)', color: 'var(--color-grey-dark)', fontWeight: 500 }}>
+                      {project.location}
+                    </span>
                   </div>
-                  <h3>{project.title}</h3>
-                  <p style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.7)', marginTop: 'var(--space-2)' }}>
+                  <h3 style={{ fontSize: 'var(--text-xl)', color: 'var(--color-navy)', marginBottom: 'var(--space-2)' }}>{project.title}</h3>
+                  <p style={{ fontSize: 'var(--text-sm)', color: 'var(--color-grey-dark)', lineHeight: 1.6 }}>
                     {project.summary}
                   </p>
+                  <div style={{ marginTop: 'var(--space-4)', paddingTop: 'var(--space-3)', borderTop: '1px solid var(--color-border)' }}>
+                    <Button to="/projects" variant="secondary" size="sm" style={{ width: '100%' }}>
+                      Explore Project &amp; Photos <ArrowRight size={14} aria-hidden="true" />
+                    </Button>
+                  </div>
                 </div>
               </article>
             ))}
           </div>
           <div style={{ textAlign: 'center', marginTop: 'var(--space-6)' }}>
             <Button to="/projects" variant="secondary">
-              View All Projects <ArrowRight size={16} aria-hidden="true" />
+              View All {PROJECTS.length} Projects <ArrowRight size={16} aria-hidden="true" />
             </Button>
           </div>
         </div>

@@ -102,11 +102,56 @@ export default function ContactPage() {
       {/* ── HERO ──────────────────────────────────────────────────────── */}
       <section className="contact-hero section-navy" aria-labelledby="contact-heading">
         <div className="container">
-          <span className="page-header-eyebrow">Direct Consultation</span>
-          <h1 id="contact-heading">Let's Talk Engineering.</h1>
-          <p className="contact-hero-sub">
-            Whether you are planning a digital platform, breaking ground on physical infrastructure, or require an integrated feasibility study — our leadership team is ready.
-          </p>
+          <div className="contact-hero-grid">
+            <div className="contact-hero-content">
+              <span className="page-header-eyebrow">Direct Consultation</span>
+              <h1 id="contact-heading">Let's Talk Engineering.</h1>
+              <p className="contact-hero-sub">
+                Whether you are planning a digital platform, breaking ground on physical infrastructure, or require an integrated feasibility study — our leadership team is ready.
+              </p>
+
+              <div className="contact-hero-highlights">
+                <div className="contact-hero-highlight-item">
+                  <span className="highlight-bullet highlight-bullet--tech" aria-hidden="true" />
+                  <span>Direct Advisory with Principal Systems Leadership</span>
+                </div>
+                <div className="contact-hero-highlight-item">
+                  <span className="highlight-bullet highlight-bullet--construction" aria-hidden="true" />
+                  <span>Turnkey Structural &amp; Software Scopes Under One Roof</span>
+                </div>
+                <div className="contact-hero-highlight-item">
+                  <span className="highlight-bullet highlight-bullet--green" aria-hidden="true" />
+                  <span>Rapid 24–48hr Preliminary Feasibility Response</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="contact-hero-profile-pane">
+              <div className="contact-hero-card">
+                <div className="contact-hero-card-media">
+                  <img
+                    src="/images/ABM.png"
+                    alt="Arabang (ABM) — Founder and Principal Systems Engineer at First Minds"
+                    className="contact-hero-card-img"
+                    loading="eager"
+                  />
+                  <div className="contact-hero-live-badge">
+                    <span className="status-dot status-dot--complete" aria-hidden="true" />
+                    <span>Direct Advisory Available</span>
+                  </div>
+                </div>
+
+                <div className="contact-hero-card-meta">
+                  <div className="contact-hero-name">Arabang B. M.</div>
+                  <div className="contact-hero-role">Founder &amp; Principal Systems Engineer</div>
+                  <div className="contact-hero-org">First Minds (Pty) Ltd • Botswana</div>
+                  <p className="contact-hero-quote">
+                    "From conceptual architecture to active on-site deployment, we partner directly with our clients at every milestone."
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

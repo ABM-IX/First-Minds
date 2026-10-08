@@ -4,11 +4,19 @@
 
 /* ---------- Hero ----------------------------------------------------------- */
 .hero {
+  --theme-heading: var(--color-white);
+  --theme-text-base: var(--color-white);
+  --theme-text-muted: rgba(255, 255, 255, 0.82);
   position: relative;
-  min-height: 90vh;
+  min-height: 88vh;
   display: flex;
   align-items: center;
   background: var(--color-navy);
+  background-image: 
+    radial-gradient(ellipse at 85% 20%, rgba(10, 102, 194, 0.16) 0%, transparent 55%),
+    radial-gradient(ellipse at 15% 80%, rgba(245, 166, 35, 0.12) 0%, transparent 50%),
+    var(--texture-blueprint);
+  background-size: auto, auto, var(--texture-blueprint-size);
   overflow: hidden;
   padding-block: var(--space-12);
 }
@@ -53,18 +61,18 @@
 .hero h1 {
   font-size: var(--text-hero);
   font-weight: 700;
-  color: var(--theme-heading);
+  color: var(--color-white);
   line-height: 1.08;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.035em;
   margin-bottom: var(--space-5);
 }
 
-.hero h1 .text-tech         { color: var(--color-tech); }
+.hero h1 .text-tech         { color: #60a5fa; }
 .hero h1 .text-construction { color: var(--color-construction); }
 
 .hero-description {
   font-size: var(--text-lg);
-  color: var(--theme-text-muted);
+  color: rgba(255, 255, 255, 0.85);
   line-height: 1.7;
   max-width: 580px;
   margin-bottom: var(--space-6);

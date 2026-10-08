@@ -1,7 +1,7 @@
 import Button from './Button'
 
 /**
- * CTASection — dark navy call-to-action block
+ * CTASection — Compact floating call-to-action card with clean separation from footer
  * title: string
  * subtitle: string
  * primaryLabel: string
@@ -18,24 +18,22 @@ export default function CTASection({
   secondaryTo = '/projects'
 }) {
   return (
-    <section className="cta-section section-padding section-navy" aria-labelledby="cta-heading">
+    <section className="cta-wrapper" aria-labelledby="cta-heading">
       <div className="container">
-        <div className="cta-section-content" style={{ position: 'relative', zIndex: 1 }}>
-          <h2 id="cta-heading">{title}</h2>
-          <p>{subtitle}</p>
-          <div className="cta-buttons">
-            <Button to={primaryTo} variant="white">
-              {primaryLabel}
-            </Button>
-            {secondaryLabel && secondaryTo && (
-              <Button
-                to={secondaryTo}
-                variant="ghost"
-                style={{ color: 'rgba(255,255,255,0.7)', borderColor: 'rgba(255,255,255,0.3)' }}
-              >
-                {secondaryLabel}
+        <div className="cta-card">
+          <div className="cta-card-content">
+            <h2 id="cta-heading" className="cta-card-title">{title}</h2>
+            <p className="cta-card-subtitle">{subtitle}</p>
+            <div className="cta-buttons">
+              <Button to={primaryTo} variant="white">
+                {primaryLabel}
               </Button>
-            )}
+              {secondaryLabel && secondaryTo && (
+                <Button to={secondaryTo} variant="ghost">
+                  {secondaryLabel}
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       </div>

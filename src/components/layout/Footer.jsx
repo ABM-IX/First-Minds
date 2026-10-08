@@ -41,9 +41,19 @@ export default function Footer() {
           {/* Column 1: Brand */}
           <div className="footer-brand">
             <Link to="/" className="footer-logo-link" aria-label="First Minds — Home">
-              <span className="footer-logo-badge">
-                <img src={LOGO_SRC} alt="First Minds" className="footer-logo" width="160" height="44" />
-              </span>
+              <div className="footer-logo-badge">
+                <img
+                  src="/logo/fm-icon.svg"
+                  alt="First Minds Emblem"
+                  className="footer-logo-emblem"
+                  width="44"
+                  height="44"
+                />
+                <div className="footer-brand-lockup">
+                  <span className="footer-brand-title">FIRST MINDS</span>
+                  <span className="footer-brand-subtitle">Technology & Infrastructure</span>
+                </div>
+              </div>
             </Link>
             <p className="footer-tagline">{COMPANY.tagline}</p>
             <p className="footer-description">

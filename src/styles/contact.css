@@ -5,8 +5,41 @@
 /* ---------- Contact Hero --------------------------------------------------- */
 .contact-hero {
   background: var(--color-navy);
-  padding-top: calc(var(--navbar-height) + var(--space-10));
+  padding-top: calc(var(--navbar-height) + var(--space-8));
   padding-bottom: var(--space-10);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--texture-blueprint);
+  background-size: var(--texture-blueprint-size);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.contact-hero-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: var(--space-8);
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 900px) {
+  .contact-hero-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+}
+
+.contact-hero-content {
+  display: flex;
+  flex-direction: column;
 }
 
 .contact-hero h1 {
@@ -15,12 +48,164 @@
   font-weight: 700;
   letter-spacing: -0.03em;
   margin-bottom: var(--space-3);
+  line-height: 1.15;
+}
+
+@media (max-width: 640px) {
+  .contact-hero h1 {
+    font-size: var(--text-4xl);
+  }
 }
 
 .contact-hero-sub {
   font-size: var(--text-lg);
-  color: rgba(255, 255, 255, 0.7);
-  max-width: 520px;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 540px;
+  line-height: 1.65;
+  margin-bottom: var(--space-5);
+}
+
+.contact-hero-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.contact-hero-highlight-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+.highlight-bullet {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.highlight-bullet--tech {
+  background: var(--color-tech);
+  box-shadow: 0 0 8px rgba(0, 163, 224, 0.6);
+}
+
+.highlight-bullet--construction {
+  background: var(--color-construction);
+  box-shadow: 0 0 8px rgba(245, 130, 32, 0.6);
+}
+
+.highlight-bullet--green {
+  background: #10b981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+}
+
+/* Profile Card in Hero */
+.contact-hero-profile-pane {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 900px) {
+  .contact-hero-profile-pane {
+    justify-content: flex-start;
+  }
+}
+
+.contact-hero-card {
+  background: rgba(15, 27, 46, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius-xl);
+  padding: var(--space-3);
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  max-width: 360px;
+  width: 100%;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.contact-hero-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(0, 163, 224, 0.3);
+}
+
+.contact-hero-card-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #09111c;
+}
+
+.contact-hero-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.contact-hero-card:hover .contact-hero-card-img {
+  transform: scale(1.02);
+}
+
+.contact-hero-live-badge {
+  position: absolute;
+  bottom: var(--space-3);
+  left: var(--space-3);
+  background: rgba(15, 27, 46, 0.88);
+  backdrop-filter: blur(6px);
+  color: var(--color-white);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  z-index: 2;
+}
+
+.contact-hero-card-meta {
+  padding: var(--space-3) var(--space-2) var(--space-1);
+}
+
+.contact-hero-name {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-white);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.contact-hero-role {
+  font-size: var(--text-xs);
+  color: var(--color-tech);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.contact-hero-org {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 2px;
+}
+
+.contact-hero-quote {
+  font-size: 12px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.5;
+  margin-top: var(--space-2);
+  padding-top: var(--space-2);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* ---------- Contact Layout ------------------------------------------------- */

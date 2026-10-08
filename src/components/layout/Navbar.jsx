@@ -22,18 +22,33 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
 
-  // Determine which logo and alt to show based on current route
-  const getLogoData = () => {
+  // Determine which division/context we are in
+  const getDivisionData = () => {
     if (location.pathname.startsWith('/technology')) {
-      return { src: LOGOS.tech, alt: 'First Minds Technologies' }
+      return {
+        iconSrc: LOGOS.icon,
+        division: 'tech',
+        label: 'TECHNOLOGIES',
+        alt: 'First Minds Technologies'
+      }
     }
     if (location.pathname.startsWith('/construction')) {
-      return { src: LOGOS.construction, alt: 'First Minds Construction' }
+      return {
+        iconSrc: LOGOS.icon,
+        division: 'construction',
+        label: 'CONSTRUCTION',
+        alt: 'First Minds Construction'
+      }
     }
-    return { src: LOGOS.master, alt: 'First Minds — Building Intelligent Solutions' }
+    return {
+      iconSrc: LOGOS.icon,
+      division: 'master',
+      label: 'INTELLIGENT SOLUTIONS',
+      alt: 'First Minds — Building Intelligent Solutions'
+    }
   }
 
-  const { src: logoSrc, alt: logoAlt } = getLogoData()
+  const { iconSrc, division, label: divisionLabel, alt: logoAlt } = getDivisionData()
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -50,19 +65,25 @@ export default function Navbar() {
 
       <header className={navShellClass} role="banner">
         <div className="navbar-inner">
-          {/* Logo */}
+          {/* Logo Brand Lockup */}
           <Link
             to="/"
             className="navbar-logo-link"
-            aria-label="First Minds — Home"
+            aria-label="First Minds — Building Intelligent Solutions"
           >
             <img
-              src={logoSrc}
+              src={iconSrc}
               alt={logoAlt}
-              className="navbar-logo-img"
-              width="73"
-              height="44"
+              className="navbar-logo-emblem"
+              width="46"
+              height="46"
             />
+            <div className="navbar-logo-text-group">
+              <span className="navbar-logo-title">FIRST MINDS</span>
+              <span className={`navbar-logo-division navbar-logo-division--${division}`}>
+                {divisionLabel}
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Nav */}

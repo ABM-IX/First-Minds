@@ -72,7 +72,7 @@ export default function TechnologyPage() {
       </section>
 
       {/* ── WHY CHOOSE US ─────────────────────────────────────── */}
-      <section className="division-why division-why--tech section-padding section-navy" aria-labelledby="why-tech-heading">
+      <section className="division-why division-why--tech section-padding section-surface" aria-labelledby="why-tech-heading">
         <div className="container">
           <SectionHeader
             eyebrow="The First Minds Advantage"

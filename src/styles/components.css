@@ -3,18 +3,21 @@
    Card, SectionHeader, CTA, Stats, Loader, ScrollToTop, etc.
    ========================================================================== */
 
-/* ---------- Loader --------------------------------------------------------- */
+/* ---------- Loader (First Minds Launch Splash) ---------------------------- */
 .page-loader {
   position: fixed;
   inset: 0;
   z-index: 9999;
   background: var(--color-navy);
+  background-image: 
+    radial-gradient(circle at 50% 45%, rgba(10, 102, 194, 0.18) 0%, transparent 60%),
+    radial-gradient(circle at 50% 55%, rgba(245, 166, 35, 0.12) 0%, transparent 55%),
+    var(--texture-blueprint);
+  background-size: auto, auto, var(--texture-blueprint-size);
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  gap: var(--space-4);
-  transition: opacity 0.5s ease, visibility 0.5s ease;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s ease;
 }
 
 .page-loader.hidden {
@@ -23,29 +26,109 @@
   pointer-events: none;
 }
 
+.loader-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-4);
+  max-width: 380px;
+  padding-inline: var(--space-4);
+  animation: loaderFadeIn 0.5s ease-out forwards;
+}
+
+@keyframes loaderFadeIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.loader-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-white);
+  padding: 14px;
+  border-radius: var(--radius-xl);
+  box-shadow: 
+    0 12px 32px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.15),
+    0 0 24px rgba(10, 102, 194, 0.25);
+  transition: transform var(--transition-base);
+}
+
 .loader-logo {
-  width: 60px;
-  height: 60px;
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+  display: block;
+}
+
+.loader-brand-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.loader-brand-name {
+  font-family: var(--font-heading);
+  font-size: 1.625rem;
+  font-weight: 700;
+  color: var(--color-white);
+  letter-spacing: 0.12em;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.loader-brand-tagline {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.03em;
+  margin: 0;
+}
+
+.loader-divisions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.loader-div-tech {
+  color: #60a5fa;
+}
+
+.loader-div-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.loader-div-construction {
+  color: var(--color-construction);
 }
 
 .loader-bar {
-  width: 200px;
-  height: 2px;
-  background: rgba(255,255,255,0.1);
+  width: 220px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.15);
   border-radius: var(--radius-pill);
   overflow: hidden;
+  margin-top: var(--space-2);
 }
 
 .loader-bar-fill {
   height: 100%;
-  background: var(--color-tech);
+  background: linear-gradient(90deg, var(--color-tech) 0%, var(--color-construction) 100%);
   border-radius: var(--radius-pill);
-  animation: loaderFill 1.2s ease-in-out forwards;
-}
-
-@keyframes loaderFill {
-  0%   { width: 0%; }
-  100% { width: 100%; }
+  animation: loaderFill 1.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
 /* ---------- Scroll Progress ----------------------------------------------- */
@@ -94,40 +177,140 @@
   transform: translateY(-2px);
 }
 
-/* ---------- CTA Section ---------------------------------------------------- */
-.cta-section {
-  padding-block: var(--section-v-padding);
-  background: var(--color-white);
-  border-top: 1px solid var(--color-border);
+/* ---------- Section Header (Shared Component) ---------------------------- */
+.section-header {
+  text-align: center;
+  max-width: 680px;
+  margin-inline: auto;
+  margin-bottom: var(--space-8);
+}
+
+.section-header.text-left {
+  text-align: left;
+  margin-inline: 0;
+}
+
+.section-header .section-eyebrow {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: var(--space-2);
+}
+
+.section-header .section-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin-bottom: var(--space-3);
+  color: var(--color-navy);
+}
+
+.section-header .section-subtitle {
+  font-size: var(--text-lg);
+  line-height: 1.7;
+  color: var(--color-grey-dark);
+}
+
+/* Contrast: Dark context (when inside dark navy section or explicit dark prop) */
+.section-navy .section-header .section-title,
+.section-header--dark .section-title {
+  color: var(--color-white) !important;
+}
+
+.section-navy .section-header .section-subtitle,
+.section-header--dark .section-subtitle {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+
+/* Contrast: Light / Surface context */
+.section-white .section-header .section-title,
+.section-surface .section-header .section-title {
+  color: var(--color-navy) !important;
+}
+
+.section-white .section-header .section-subtitle,
+.section-surface .section-header .section-subtitle {
+  color: var(--color-grey-dark) !important;
+}
+
+/* Eyebrows */
+.eyebrow--tech         { color: var(--color-tech); }
+.eyebrow--construction { color: var(--color-construction); }
+.eyebrow--navy         { color: var(--color-navy); }
+.eyebrow--grey         { color: var(--color-grey-dark); }
+.section-navy .eyebrow--grey { color: rgba(255, 255, 255, 0.7) !important; }
+
+/* ---------- CTA Floating Card (Shared Component) ------------------------- */
+.cta-wrapper {
+  background: var(--color-surface);
+  padding-top: clamp(2rem, 4vw, 3.5rem);
+  padding-bottom: clamp(3.5rem, 7vw, 5.5rem);
+  position: relative;
+}
+
+.cta-card {
+  max-width: 920px;
+  margin-inline: auto;
+  background: var(--color-navy);
+  background-image: 
+    radial-gradient(ellipse at 85% 20%, rgba(10, 102, 194, 0.22) 0%, transparent 50%),
+    radial-gradient(ellipse at 15% 85%, rgba(245, 166, 35, 0.16) 0%, transparent 45%),
+    var(--texture-blueprint);
+  background-size: auto, auto, var(--texture-blueprint-size);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-2xl);
+  box-shadow: 
+    0 24px 56px -16px rgba(15, 27, 46, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
+  padding: clamp(2.25rem, 4.5vw, 3.25rem) clamp(1.5rem, 4vw, 3.5rem);
   text-align: center;
   position: relative;
   overflow: hidden;
 }
 
-.cta-section h2 {
-  font-size: var(--text-4xl);
-  font-weight: 700;
-  color: var(--color-navy);
-  letter-spacing: -0.03em;
-  margin-bottom: var(--space-4);
+.cta-card-content {
+  position: relative;
+  z-index: 1;
   max-width: 640px;
   margin-inline: auto;
-  line-height: 1.15;
 }
 
-.cta-section p {
-  font-size: var(--text-lg);
-  color: var(--color-grey-dark);
-  max-width: 480px;
-  margin: 0 auto var(--space-6);
-  line-height: 1.7;
+.cta-card-title,
+.cta-card h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.85rem, 3.5vw, 2.65rem);
+  font-weight: 700;
+  color: var(--color-white);
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin-bottom: var(--space-3);
+}
+
+.cta-card-subtitle,
+.cta-card p {
+  font-size: var(--text-base);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.65;
+  margin: 0 auto var(--space-5);
+  max-width: 520px;
 }
 
 .cta-buttons {
   display: flex;
   gap: var(--space-3);
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
+}
+
+/* Fallback for .cta-section if used anywhere */
+.cta-section {
+  padding-block: var(--space-8);
+  background: var(--color-surface);
 }
 
 /* ---------- Page Header (inner pages) ------------------------------------- */

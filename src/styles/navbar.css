@@ -43,7 +43,7 @@
   padding-inline: var(--container-padding);
 }
 
-/* ---------- Logo ----------------------------------------------------------- */
+/* ---------- Logo Brand Lockup ---------------------------------------------- */
 .navbar-logo-link {
   display: flex;
   align-items: center;
@@ -51,7 +51,8 @@
   text-decoration: none;
   flex-shrink: 0;
   border-radius: var(--radius-sm);
-  padding: 4px;
+  padding: 4px 6px;
+  transition: transform var(--transition-fast);
 }
 
 .navbar-logo-link:focus-visible {
@@ -59,6 +60,58 @@
   outline-offset: 2px;
 }
 
+.navbar-logo-emblem {
+  height: 44px;
+  width: 44px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+.navbar-logo-link:hover .navbar-logo-emblem {
+  transform: scale(1.05);
+}
+
+.navbar-logo-text-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1;
+}
+
+.navbar-logo-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--color-navy);
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+
+.navbar-logo-division {
+  font-family: var(--font-heading);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-top: 3px;
+  line-height: 1;
+}
+
+.navbar-logo-division--tech {
+  color: var(--color-tech);
+}
+
+.navbar-logo-division--construction {
+  color: var(--color-construction);
+}
+
+.navbar-logo-division--master {
+  color: var(--color-grey-dark);
+}
+
+/* Backward compatibility for image-only logo if used */
 .navbar-logo-img {
   height: 44px;
   width: auto;
@@ -66,20 +119,8 @@
   transition: transform var(--transition-fast);
 }
 
-.navbar-logo-link:hover .navbar-logo-img {
-  transform: scale(1.02);
-}
-
-.navbar-logo-text {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 1.125rem;
-  color: var(--color-navy);
-  letter-spacing: -0.02em;
-  line-height: 1;
-}
-
-.navbar-shell--dark .navbar-logo-text { color: var(--color-white); }
+.navbar-shell--dark .navbar-logo-title { color: var(--color-white); }
+.navbar-shell--dark .navbar-logo-division--master { color: rgba(255, 255, 255, 0.7); }
 
 /* ---------- Desktop Nav Links --------------------------------------------- */
 .navbar-links {

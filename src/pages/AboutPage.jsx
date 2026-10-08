@@ -55,7 +55,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── OUR STORY ─────────────────────────────────────────────────── */}
-      <section className="about-story section-padding section-navy" aria-labelledby="story-heading">
+      <section className="about-story section-padding section-surface" aria-labelledby="story-heading">
         <div className="container">
           <div className="about-story-grid">
             <div>
@@ -65,19 +65,19 @@ export default function AboutPage() {
                 subtitle="First Minds was founded with a clear mandate: the companies best equipped to solve Africa's infrastructure challenges are those capable of bridging the physical and digital divide."
                 align="left"
               />
-              <p style={{ lineHeight: 1.75, marginTop: 'var(--space-4)', color: 'rgba(255,255,255,0.85)' }}>
+              <p style={{ lineHeight: 1.75, marginTop: 'var(--space-4)', color: 'var(--theme-text-muted)' }}>
                 Physical infrastructure without digital intelligence is quickly outpaced by modern operational demands. Conversely, software without deep integration into physical engineering fails to solve foundational challenges.
               </p>
-              <p style={{ lineHeight: 1.75, marginTop: 'var(--space-3)', color: 'rgba(255,255,255,0.85)' }}>
+              <p style={{ lineHeight: 1.75, marginTop: 'var(--space-3)', color: 'var(--theme-text-muted)' }}>
                 First Minds operates with two synchronized divisions: First Minds Technologies and First Minds Construction. From smart grid automation and industrial IoT telemetry to commercial turnkey facilities and municipal civil infrastructure, we serve as a single, dependable engineering partner.
               </p>
             </div>
             <div className="about-story-image">
               <img
-                src="https://images.unsplash.com/photo-1541888086225-c6b75c138804?auto=format&fit=crop&q=80&w=800"
-                alt="First Minds engineering infrastructure in Botswana"
+                src="/images/construction-team.jpg"
+                alt="First Minds engineering infrastructure team in Botswana"
                 loading="lazy"
-                style={{ borderRadius: 'var(--radius-lg)', width: '100%', height: 'auto', objectFit: 'cover' }}
+                style={{ borderRadius: 'var(--radius-lg)', width: '100%', height: '100%', objectFit: 'cover' }}
               />
             </div>
           </div>
@@ -118,7 +118,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── OUR VALUES ────────────────────────────────────────────────── */}
-      <section className="about-values section-padding section-navy" aria-labelledby="values-heading">
+      <section className="about-values section-padding section-surface" aria-labelledby="values-heading">
         <div className="container">
           <SectionHeader
             eyebrow="Brand Values"

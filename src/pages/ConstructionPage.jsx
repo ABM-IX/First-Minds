@@ -18,23 +18,53 @@ export default function ConstructionPage() {
       <section className="division-hero division-hero--construction section-navy" aria-labelledby="construction-heading">
         <div className="division-hero-accent" aria-hidden="true" />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="division-hero-badge">
-            <HardHat size={14} aria-hidden="true" />
-            First Minds Construction
-          </div>
-          <h1 id="construction-heading">
-            Built with Precision.<br />Engineered to Endure.
-          </h1>
-          <p className="division-hero-sub">
-            From deep foundations and commercial developments to arterial civil infrastructure — we deliver physical projects with rigorous craftsmanship, structural integrity, and generational durability.
-          </p>
-          <div className="hero-ctas">
-            <Button to="/contact" variant="primary" size="lg">
-              Commission a Project
-            </Button>
-            <Button to="/projects" variant="secondary" size="lg">
-              Explore Infrastructure
-            </Button>
+          <div className="division-hero-grid">
+            <div className="division-hero-content">
+              <div className="division-hero-badge">
+                <HardHat size={14} aria-hidden="true" />
+                First Minds Construction
+              </div>
+              <h1 id="construction-heading">
+                Built with Precision.<br />Engineered to Endure.
+              </h1>
+              <p className="division-hero-sub">
+                From deep foundations and commercial developments to arterial civil infrastructure — we deliver physical projects with rigorous craftsmanship, structural integrity, and generational durability.
+              </p>
+              <div className="hero-ctas">
+                <Button to="/contact" variant="primary" size="lg">
+                  Commission a Project
+                </Button>
+                <Button to="/projects" variant="secondary" size="lg">
+                  Explore Infrastructure
+                </Button>
+              </div>
+            </div>
+
+            <div className="division-hero-profile-pane">
+              <div className="division-hero-card">
+                <div className="division-hero-card-media">
+                  <img
+                    src="/images/construction-lead.png"
+                    alt="First Minds Construction Operations Director and Site Leadership on concrete foundation slab"
+                    className="division-hero-card-img"
+                    loading="eager"
+                  />
+                  <div className="division-hero-live-badge">
+                    <span className="status-dot status-dot--complete" aria-hidden="true" />
+                    <span>On-Site Supervision &amp; Engineering</span>
+                  </div>
+                </div>
+
+                <div className="division-hero-card-meta">
+                  <div className="division-hero-leader-name">Construction Leadership</div>
+                  <div className="division-hero-leader-role">Director of Civil &amp; Structural Engineering</div>
+                  <div className="division-hero-leader-tag">First Minds Construction Division • Botswana</div>
+                  <p className="division-hero-quote">
+                    "Every foundation, rebar grid, and structural wall is personally inspected on-site to exceed quality standards."
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -72,7 +102,7 @@ export default function ConstructionPage() {
       </section>
 
       {/* ── WHY CHOOSE US ─────────────────────────────────────────────── */}
-      <section className="division-why division-why--construction section-padding section-navy" aria-labelledby="why-construction-heading">
+      <section className="division-why division-why--construction section-padding section-surface" aria-labelledby="why-construction-heading">
         <div className="container">
           <SectionHeader
             eyebrow="Why First Minds"
