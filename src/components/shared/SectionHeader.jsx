@@ -17,6 +17,7 @@ export default function SectionHeader({
       className={[
         'section-header',
         align === 'left' ? 'text-left' : 'text-center',
+        dark ? 'section-header--dark' : '',
         className
       ].filter(Boolean).join(' ')}
     >

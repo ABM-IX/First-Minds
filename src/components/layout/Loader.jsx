@@ -12,8 +12,13 @@ export default function Loader() {
 
   return (
     <div className={`page-loader ${hidden ? 'hidden' : ''}`} role="status" aria-label="Loading First Minds">
-      {/* TODO: Replace with final SVG from brand team */}
-      <img src="/logo/fm-icon.svg" alt="" className="loader-logo" aria-hidden="true" />
+      <img 
+        src="/logo/fm-icon.svg" 
+        alt="First Minds Brand Mark" 
+        className="loader-logo" 
+        width="60" 
+        height="60" 
+      />
       <div className="loader-bar" aria-hidden="true">
         <div className="loader-bar-fill" />
       </div>

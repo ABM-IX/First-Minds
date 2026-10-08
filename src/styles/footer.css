@@ -36,10 +36,32 @@
 /* ---------- Brand Column --------------------------------------------------- */
 .footer-brand {}
 
-.footer-logo {
-  height: 48px;
-  width: auto;
+.footer-logo-link {
+  display: inline-block;
+  text-decoration: none;
   margin-bottom: var(--space-4);
+}
+
+.footer-logo-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-white);
+  padding: 6px 14px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.footer-logo-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.footer-logo {
+  height: 40px;
+  width: auto;
+  display: block;
 }
 
 .footer-tagline {

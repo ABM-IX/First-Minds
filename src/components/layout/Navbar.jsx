@@ -22,12 +22,18 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
 
-  // Determine which logo to show based on current route
-  const getLogoSrc = () => {
-    if (location.pathname.startsWith('/technology'))  return LOGOS.tech
-    if (location.pathname.startsWith('/construction')) return LOGOS.construction
-    return LOGOS.master
+  // Determine which logo and alt to show based on current route
+  const getLogoData = () => {
+    if (location.pathname.startsWith('/technology')) {
+      return { src: LOGOS.tech, alt: 'First Minds Technologies' }
+    }
+    if (location.pathname.startsWith('/construction')) {
+      return { src: LOGOS.construction, alt: 'First Minds Construction' }
+    }
+    return { src: LOGOS.master, alt: 'First Minds — Building Intelligent Solutions' }
   }
+
+  const { src: logoSrc, alt: logoAlt } = getLogoData()
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -50,13 +56,12 @@ export default function Navbar() {
             className="navbar-logo-link"
             aria-label="First Minds — Home"
           >
-            {/* TODO: Replace with final SVG from brand team */}
             <img
-              src={getLogoSrc()}
-              alt="First Minds"
+              src={logoSrc}
+              alt={logoAlt}
               className="navbar-logo-img"
-              width="auto"
-              height="36"
+              width="73"
+              height="44"
             />
           </Link>
 

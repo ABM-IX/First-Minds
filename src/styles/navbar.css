@@ -50,12 +50,24 @@
   gap: var(--space-3);
   text-decoration: none;
   flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  padding: 4px;
+}
+
+.navbar-logo-link:focus-visible {
+  outline: 2px solid var(--color-navy);
+  outline-offset: 2px;
 }
 
 .navbar-logo-img {
-  height: 36px;
+  height: 44px;
   width: auto;
   display: block;
+  transition: transform var(--transition-fast);
+}
+
+.navbar-logo-link:hover .navbar-logo-img {
+  transform: scale(1.02);
 }
 
 .navbar-logo-text {

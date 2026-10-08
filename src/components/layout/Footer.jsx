@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Phone, Mail, MapPin } from 'lucide-react'
+import { COMPANY } from '../../data/company'
 
-// TODO: Replace with final SVG from brand team
 const LOGO_SRC = '/logo/fm-master.svg'
 
 // Social icons as inline SVG to avoid external icon library dependencies
@@ -20,6 +20,7 @@ const WhatsAppIcon = () => (
 const COMPANY_LINKS = [
   { to: '/',            label: 'Home' },
   { to: '/about',       label: 'About Us' },
+  { to: '/projects',    label: 'Projects' },
   { to: '/contact',     label: 'Contact' },
 ]
 
@@ -39,15 +40,14 @@ export default function Footer() {
         <div className="footer-grid">
           {/* Column 1: Brand */}
           <div className="footer-brand">
-            <Link to="/" aria-label="First Minds — Home">
-              {/* TODO: Replace with final SVG from brand team */}
-              <img src={LOGO_SRC} alt="First Minds" className="footer-logo" />
+            <Link to="/" className="footer-logo-link" aria-label="First Minds — Home">
+              <span className="footer-logo-badge">
+                <img src={LOGO_SRC} alt="First Minds" className="footer-logo" width="160" height="44" />
+              </span>
             </Link>
-            <p className="footer-tagline">Building Intelligent Solutions.</p>
-            {/* PLACEHOLDER company description — update when real copy is approved */}
+            <p className="footer-tagline">{COMPANY.tagline}</p>
             <p className="footer-description">
-              First Minds (PTY) LTD — one company delivering Technology and Construction
-              solutions across Botswana and beyond.
+              {COMPANY.position}
             </p>
           </div>
 
@@ -78,19 +78,18 @@ export default function Footer() {
           {/* Column 4: Contact */}
           <div>
             <h3 className="footer-col-title">Contact</h3>
-            {/* PLACEHOLDER contact details — replace with verified business contact info */}
             <div className="footer-contact-items">
               <div className="footer-contact-item">
                 <MapPin size={15} className="footer-contact-icon" aria-hidden="true" />
-                <span>Plot 5919, Kopong, Botswana</span>
+                <span>{COMPANY.contact.address}</span>
               </div>
               <div className="footer-contact-item">
                 <Phone size={15} className="footer-contact-icon" aria-hidden="true" />
-                <a href="tel:+26772717212" aria-label="Call First Minds">+267 72 717 212</a>
+                <a href={`tel:${COMPANY.contact.phoneRaw}`} aria-label={`Call ${COMPANY.name}`}>{COMPANY.contact.phone}</a>
               </div>
               <div className="footer-contact-item">
                 <Mail size={15} className="footer-contact-icon" aria-hidden="true" />
-                <a href="mailto:firstminds@gmail.com" aria-label="Email First Minds">firstminds@gmail.com</a>
+                <a href={`mailto:${COMPANY.contact.emailGeneral}`} aria-label={`Email ${COMPANY.name}`}>{COMPANY.contact.emailGeneral}</a>
               </div>
             </div>
 
@@ -105,7 +104,7 @@ export default function Footer() {
                 <FacebookIcon />
               </a>
               <a
-                href="https://wa.me/26772717212"
+                href={`https://wa.me/${COMPANY.contact.phoneRaw}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Chat with First Minds on WhatsApp"
