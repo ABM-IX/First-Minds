@@ -7,6 +7,8 @@ export default function ProjectCardSlideshow({ images = [], title = '', status =
   const timerRef = useRef(null)
 
   const hasMultiple = images.length > 1
+  const currentImg = images[currentIndex] || images[0]
+  const isSmartTransit = currentImg?.includes('/SmartTransit/')
 
   useEffect(() => {
     if (!hasMultiple || isPaused) return
@@ -35,8 +37,6 @@ export default function ProjectCardSlideshow({ images = [], title = '', status =
     setCurrentIndex(idx)
   }
 
-  const currentImg = images[currentIndex] || images[0]
-
   return (
     <div 
       className="project-card-slideshow"
@@ -45,7 +45,7 @@ export default function ProjectCardSlideshow({ images = [], title = '', status =
       role="region"
       aria-label={`${title} image slideshow`}
     >
-      <div className="slideshow-image-wrapper">
+      <div className={`slideshow-image-wrapper ${isSmartTransit ? 'slideshow-image-wrapper--logo' : ''}`}>
         <img
           src={currentImg}
           alt={`${title} — photo ${currentIndex + 1} of ${images.length}`}
@@ -96,7 +96,7 @@ export default function ProjectCardSlideshow({ images = [], title = '', status =
 
         {/* Pagination Dots */}
         {hasMultiple && images.length <= 8 && (
-          <div className="slideshow-dots" aria-hidden="true">
+          <div className="slideshow-dots">
             {images.map((_, idx) => (
               <button
                 key={idx}

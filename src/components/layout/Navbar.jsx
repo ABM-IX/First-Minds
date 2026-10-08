@@ -60,9 +60,6 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Skip to content — accessibility */}
-      <a href="#main-content" className="skip-link">Skip to content</a>
-
       <header className={navShellClass} role="banner">
         <div className="navbar-inner">
           {/* Logo Brand Lockup */}

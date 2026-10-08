@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import { Phone, Mail, MapPin } from 'lucide-react'
 import { COMPANY } from '../../data/company'
 
-const LOGO_SRC = '/logo/fm-master.svg'
 
 // Social icons as inline SVG to avoid external icon library dependencies
 const FacebookIcon = () => (

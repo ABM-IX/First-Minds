@@ -490,17 +490,6 @@ ul, ol { list-style: none; }
   margin-block: var(--space-6);
 }
 
-/* ---------- Scroll Progress Bar ------------------------------------------- */
-.scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 3px;
-  background: var(--color-navy);
-  z-index: 9999;
-  transition: width var(--transition-fast);
-}
-
 /* ---------- prefers-reduced-motion global override ------------------------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

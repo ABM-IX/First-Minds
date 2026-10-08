@@ -19,6 +19,7 @@ export default function ProjectsPage() {
 
   const techCount = PROJECTS.filter(p => p.division === 'tech').length
   const constCount = PROJECTS.filter(p => p.division === 'construction').length
+  const openProject = (project) => setSelectedProject(project)
 
   return (
     <main className="projects-page">
@@ -64,11 +65,10 @@ export default function ProjectsPage() {
           </div>
 
           {/* Division Filter */}
-          <div className="projects-filter" role="tablist" aria-label="Filter projects by division">
+          <div className="projects-filter" role="group" aria-label="Filter projects by division">
             <button 
               type="button"
-              role="tab"
-              aria-selected={filter === 'all'}
+              aria-pressed={filter === 'all'}
               className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
               onClick={() => setFilter('all')}
             >
@@ -76,8 +76,7 @@ export default function ProjectsPage() {
             </button>
             <button 
               type="button"
-              role="tab"
-              aria-selected={filter === 'construction'}
+              aria-pressed={filter === 'construction'}
               className={`filter-btn ${filter === 'construction' ? 'active' : ''}`}
               onClick={() => setFilter('construction')}
             >
@@ -85,8 +84,7 @@ export default function ProjectsPage() {
             </button>
             <button 
               type="button"
-              role="tab"
-              aria-selected={filter === 'tech'}
+              aria-pressed={filter === 'tech'}
               className={`filter-btn ${filter === 'tech' ? 'active' : ''}`}
               onClick={() => setFilter('tech')}
             >
@@ -119,8 +117,9 @@ export default function ProjectsPage() {
                     key={project.id} 
                     className="project-card" 
                     data-division={project.division}
+                    data-project-id={project.id}
                     role="listitem"
-                    onClick={() => setSelectedProject(project)}
+                    onClick={() => openProject(project)}
                   >
                     {/* Slideshow Top */}
                     <ProjectCardSlideshow 
@@ -194,7 +193,7 @@ export default function ProjectsPage() {
                           className="btn btn-secondary btn-sm project-view-btn"
                           onClick={(e) => {
                             e.stopPropagation()
-                            setSelectedProject(project)
+                            openProject(project)
                           }}
                           aria-haspopup="dialog"
                           aria-label={`View full specifications and photos for ${project.title}`}
@@ -215,6 +214,7 @@ export default function ProjectsPage() {
       {/* Project Detail Modal Popup */}
       {selectedProject && (
         <ProjectDetailModal 
+          key={selectedProject.id}
           project={selectedProject} 
           onClose={() => setSelectedProject(null)} 
         />

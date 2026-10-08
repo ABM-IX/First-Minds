@@ -19,10 +19,6 @@ export default function ProjectDetailModal({ project, onClose }) {
   const [activePhotoIdx, setActivePhotoIdx] = useState(0)
 
   useEffect(() => {
-    setActivePhotoIdx(0)
-  }, [project])
-
-  useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
         onClose()
@@ -47,6 +43,7 @@ export default function ProjectDetailModal({ project, onClose }) {
   const images = project.images || [project.image]
   const hasMultiplePhotos = images.length > 1
   const activePhoto = images[activePhotoIdx] || project.image
+  const isLogoPhoto = activePhoto?.includes('/SmartTransit/')
 
   const isTech = project.division === 'tech'
 
@@ -121,7 +118,7 @@ export default function ProjectDetailModal({ project, onClose }) {
 
         {/* Media Gallery / Slideshow */}
         <section className="project-modal-gallery" aria-label="Project photo gallery">
-          <div className="gallery-main-view">
+          <div className={`gallery-main-view ${isLogoPhoto ? 'gallery-main-view--logo' : ''}`}>
             <img 
               src={activePhoto} 
               alt={`${project.title} — photo ${activePhotoIdx + 1} of ${images.length}`} 

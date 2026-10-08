@@ -84,6 +84,53 @@
   flex-wrap: wrap;
 }
 
+/* ---------- Featured Project Cards ---------------------------------------- */
+.featured-projects .grid-2 {
+  gap: var(--space-4);
+  max-width: 1120px;
+  margin-inline: auto;
+}
+
+.featured-projects .project-image {
+  aspect-ratio: 16 / 7 !important;
+}
+
+.featured-projects .project-card[data-project-id="smarttransit"] .project-image {
+  background: var(--color-white) !important;
+}
+
+.featured-projects .project-card[data-project-id="smarttransit"] .project-image img {
+  object-fit: contain !important;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+.featured-projects .project-status {
+  top: var(--space-2) !important;
+  left: var(--space-2) !important;
+}
+
+.featured-projects .project-info {
+  padding: var(--space-4) !important;
+}
+
+.featured-projects .project-info h3 {
+  font-size: 1.125rem !important;
+}
+
+.featured-projects .project-info p {
+  display: -webkit-box;
+  font-size: var(--text-sm) !important;
+  line-height: 1.55 !important;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.featured-projects .project-info > div:last-child {
+  margin-top: var(--space-3) !important;
+  padding-top: var(--space-2) !important;
+}
+
 /* ---------- Who We Are ----------------------------------------------------- */
 .who-we-are {
   background: var(--color-surface);

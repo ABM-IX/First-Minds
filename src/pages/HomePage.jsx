@@ -147,7 +147,7 @@ export default function HomePage() {
           
           <div className="grid-2">
             {featuredProjects.map(project => (
-              <article key={project.id} className="project-card" data-division={project.division}>
+              <article key={project.id} className="project-card" data-division={project.division} data-project-id={project.id}>
                 <div className="project-image" style={{ position: 'relative', aspectRatio: '16/10', overflow: 'hidden', background: '#0f172a' }}>
                   <img src={project.image} alt={project.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   <div className="project-status" style={{ position: 'absolute', top: 'var(--space-3)', left: 'var(--space-3)', background: 'rgba(15, 27, 46, 0.88)', backdropFilter: 'blur(6px)', color: 'var(--color-white)', padding: '0.25rem 0.75rem', borderRadius: 'var(--radius-pill)', fontSize: 'var(--text-xs)', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '6px' }}>

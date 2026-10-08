@@ -244,6 +244,18 @@
 .eyebrow--grey         { color: var(--color-grey-dark); }
 .section-navy .eyebrow--grey { color: rgba(255, 255, 255, 0.7) !important; }
 
+.badge--construction {
+  background: #fff1d6 !important;
+  color: #7a4a00 !important;
+  border: 1px solid rgba(245, 166, 35, 0.28);
+}
+
+.badge--tech {
+  background: #dbeafe !important;
+  color: #064785 !important;
+  border: 1px solid rgba(10, 102, 194, 0.24);
+}
+
 /* ---------- CTA Floating Card (Shared Component) ------------------------- */
 .cta-wrapper {
   background: var(--color-surface);
