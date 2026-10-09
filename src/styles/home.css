@@ -606,7 +606,7 @@
 /* ---------- Responsive ----------------------------------------------------- */
 @media (max-width: 768px) {
   .hero {
-    --hero-fixed-height: clamp(820px, 100vh, 920px);
+    --hero-fixed-height: clamp(620px, 88vh, 760px);
     height: var(--hero-fixed-height);
     min-height: var(--hero-fixed-height);
     padding-top: calc(var(--navbar-height) + var(--space-5));
@@ -652,6 +652,10 @@
     display: none;
   }
 
+  .hero-arrow-btn {
+    display: none;
+  }
+
   .hero-visual--construction .hero-visual-img {
     object-position: center 34%;
   }
@@ -663,27 +667,10 @@
 }
 
 @media (max-width: 480px) {
-  .hero {
-    --hero-fixed-height: 880px;
-  }
-
   .solutions-grid { grid-template-columns: repeat(2, 1fr); }
   .hero-ctas      { flex-direction: column; }
   .hero-ctas .btn { width: 100%; justify-content: center; }
   .hero-slide-controls {
     bottom: 0.85rem;
-  }
-
-  .hero-arrow-btn {
-    width: 2.35rem;
-    height: 2.35rem;
-  }
-
-  .hero-arrow-btn--prev {
-    left: 0.55rem;
-  }
-
-  .hero-arrow-btn--next {
-    right: 0.55rem;
   }
 }

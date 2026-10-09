@@ -4,6 +4,7 @@
  * eyebrowColor: 'tech' | 'construction' | 'navy' | 'grey'
  */
 export default function SectionHeader({
+  id,
   eyebrow,
   title,
   subtitle,
@@ -27,7 +28,7 @@ export default function SectionHeader({
         </span>
       )}
       {title && (
-        <h2 className="section-title">
+        <h2 id={id} className="section-title">
           {title}
         </h2>
       )}
