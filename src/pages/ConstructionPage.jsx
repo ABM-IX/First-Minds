@@ -34,7 +34,7 @@ export default function ConstructionPage() {
                 <Button to="/contact" variant="primary" size="lg">
                   Start a Project
                 </Button>
-                <Button to="/projects" variant="secondary" size="lg">
+                <Button to="/projects?division=construction" variant="secondary" size="lg">
                   Explore Our Work
                 </Button>
               </div>

@@ -34,7 +34,7 @@ export default function TechnologyPage() {
             <Button to="/contact" variant="primary" size="lg">
               Consult an Engineer
             </Button>
-            <Button to="/projects" variant="secondary" size="lg">
+            <Button to="/projects?division=tech" variant="secondary" size="lg">
               Explore Tech Projects
             </Button>
           </div>

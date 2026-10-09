@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { HardHat, Cpu, MapPin, CheckCircle, Info, User, ArrowRight, Eye } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Button from '../components/shared/Button'
 import ProjectCardSlideshow from '../components/projects/ProjectCardSlideshow'
 import ProjectDetailModal from '../components/projects/ProjectDetailModal'
@@ -9,9 +10,19 @@ import { COMPANY } from '../data/company'
 import '../styles/projects.css'
 
 export default function ProjectsPage() {
-  const [filter, setFilter] = useState('all')
+  const location = useLocation()
+  const navigate = useNavigate()
   const [selectedProject, setSelectedProject] = useState(null)
   const [heroImageIndex, setHeroImageIndex] = useState(0)
+  const filter = useMemo(() => {
+    const division = new URLSearchParams(location.search).get('division')
+    return division === 'construction' || division === 'tech' ? division : 'all'
+  }, [location.search])
+
+  const setProjectFilter = (nextFilter) => {
+    const search = nextFilter === 'all' ? '' : `?division=${nextFilter}`
+    navigate({ pathname: '/projects', search })
+  }
 
   const filteredProjects = PROJECTS.filter(project => {
     if (filter === 'all') return true
@@ -111,7 +122,7 @@ export default function ProjectsPage() {
               type="button"
               aria-pressed={filter === 'all'}
               className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
-              onClick={() => setFilter('all')}
+              onClick={() => setProjectFilter('all')}
             >
               All Projects ({PROJECTS.length})
             </button>
@@ -119,7 +130,7 @@ export default function ProjectsPage() {
               type="button"
               aria-pressed={filter === 'construction'}
               className={`filter-btn ${filter === 'construction' ? 'active' : ''}`}
-              onClick={() => setFilter('construction')}
+              onClick={() => setProjectFilter('construction')}
             >
               <HardHat size={16} aria-hidden="true" /> Construction Division ({constCount})
             </button>
@@ -127,7 +138,7 @@ export default function ProjectsPage() {
               type="button"
               aria-pressed={filter === 'tech'}
               className={`filter-btn ${filter === 'tech' ? 'active' : ''}`}
-              onClick={() => setFilter('tech')}
+              onClick={() => setProjectFilter('tech')}
             >
               <Cpu size={16} aria-hidden="true" /> Technology Division ({techCount})
             </button>
@@ -144,7 +155,7 @@ export default function ProjectsPage() {
               <button 
                 type="button"
                 className="btn btn-primary"
-                onClick={() => setFilter('all')}
+                onClick={() => setProjectFilter('all')}
               >
                 Reset Filter
               </button>
