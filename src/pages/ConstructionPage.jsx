@@ -28,14 +28,14 @@ export default function ConstructionPage() {
                 Built with Precision.<br />Engineered to Endure.
               </h1>
               <p className="division-hero-sub">
-                From deep foundations and commercial developments to arterial civil infrastructure — we deliver physical projects with rigorous craftsmanship, structural integrity, and generational durability.
+                From residential construction and renovations to foundations, roofing, site works, and civil delivery, First Minds Construction builds practical physical infrastructure with attention to structure, workmanship, and durability.
               </p>
               <div className="hero-ctas">
                 <Button to="/contact" variant="primary" size="lg">
                   Start a Project
                 </Button>
                 <Button to="/projects?division=construction" variant="secondary" size="lg">
-                  Explore Our Work
+                  View Construction Projects
                 </Button>
               </div>
             </div>
@@ -159,3 +159,4 @@ export default function ConstructionPage() {
     </>
   )
 }
+

@@ -1,5 +1,6 @@
+import { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
-import { Cpu, HardHat, ArrowRight } from 'lucide-react'
+import { Cpu, HardHat, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import Button from '../components/shared/Button'
 import SectionHeader from '../components/shared/SectionHeader'
 import DivisionCard from '../components/shared/DivisionCard'
@@ -9,13 +10,107 @@ import { COMPANY } from '../data/company'
 import { CAPABILITIES, PROCESS_STEPS } from '../data/capabilities'
 import { PROJECTS } from '../data/projects'
 
+const HERO_SLIDES = [
+  {
+    id: 'company',
+    eyebrow: 'First Minds',
+    accent: 'company',
+    image: '/images/About.png',
+    imageAlt: 'First Minds company signage',
+    visualLabel: 'First Minds (Pty) Ltd',
+    heading: (
+      <>
+        Where <span className="text-tech">Technology</span> Meets{' '}
+        <span className="text-construction">Infrastructure</span>
+      </>
+    ),
+    description:
+      'First Minds brings software development and construction together under one company, delivering digital solutions and physical infrastructure for practical, real-world needs.',
+    primaryLabel: 'Explore Services',
+    primaryTo: '/#divisions-heading',
+    secondaryLabel: 'Contact Us',
+    secondaryTo: '/contact'
+  },
+  {
+    id: 'technology',
+    eyebrow: 'Technology Division',
+    accent: 'tech',
+    image: '/images/Projects/Technologies/SmartTransit/SmartTransit.png',
+    imageAlt: 'SmartTransit brand graphic representing First Minds technology work',
+    visualLabel: 'Technology Services',
+    heading: 'Turning Technology Ideas Into Intelligent Solutions',
+    description:
+      'From website and application development to custom software, system development, and digital platforms, First Minds builds practical technology solutions around real needs.',
+    primaryLabel: 'Explore Technology',
+    primaryTo: '/technology',
+    secondaryLabel: 'View Technology Projects',
+    secondaryTo: '/projects?division=tech'
+  },
+  {
+    id: 'construction',
+    eyebrow: 'Construction & Civil Services',
+    accent: 'construction',
+    image: '/images/construction-lead.png',
+    imageAlt: 'First Minds construction leadership inspecting a foundation site',
+    visualLabel: 'Construction & Civil Services',
+    heading: 'Building the Foundation of Tomorrow',
+    description:
+      'First Minds Construction supports residential builds, renovations, foundations, roofing, site works, and related civil delivery with practical attention to structure and durability.',
+    primaryLabel: 'Explore Construction',
+    primaryTo: '/construction',
+    secondaryLabel: 'View Construction Projects',
+    secondaryTo: '/projects?division=construction'
+  }
+]
+
 export default function HomePage() {
+  const [activeSlide, setActiveSlide] = useState(0)
+  const [isHeroPaused, setIsHeroPaused] = useState(false)
+  const [touchStartX, setTouchStartX] = useState(null)
   const featuredProjects = PROJECTS.slice(0, 2)
+  const currentSlide = HERO_SLIDES[activeSlide]
   const metrics = [
     { value: 18, suffix: '+', label: 'Projects Delivered' },
     { value: 2, label: 'Integrated Divisions' },
     { value: 1, label: 'Botswana Headquarters' }
   ]
+
+  useEffect(() => {
+    if (isHeroPaused) return undefined
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
+
+    const intervalId = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % HERO_SLIDES.length)
+    }, 6000)
+
+    return () => window.clearInterval(intervalId)
+  }, [isHeroPaused])
+
+  const goToPreviousSlide = () => {
+    setActiveSlide((current) => (current - 1 + HERO_SLIDES.length) % HERO_SLIDES.length)
+  }
+
+  const goToNextSlide = () => {
+    setActiveSlide((current) => (current + 1) % HERO_SLIDES.length)
+  }
+
+  const handleTouchEnd = (event) => {
+    if (touchStartX === null) return
+
+    const touchEndX = event.changedTouches[0]?.clientX
+    if (typeof touchEndX !== 'number') return
+
+    const deltaX = touchStartX - touchEndX
+    if (Math.abs(deltaX) > 48) {
+      if (deltaX > 0) {
+        goToNextSlide()
+      } else {
+        goToPreviousSlide()
+      }
+    }
+
+    setTouchStartX(null)
+  }
 
   return (
     <>
@@ -25,34 +120,85 @@ export default function HomePage() {
       </Helmet>
 
       {/* ── HERO ──────────────────────────────────────────────────────── */}
-      <section className="hero" aria-labelledby="hero-heading">
+      <section
+        className={`hero hero--${currentSlide.accent}`}
+        style={{ '--hero-image': `url(${currentSlide.image})` }}
+        aria-labelledby="hero-heading"
+        onFocus={() => setIsHeroPaused(true)}
+        onBlur={() => setIsHeroPaused(false)}
+        onTouchStart={(event) => setTouchStartX(event.touches[0]?.clientX ?? null)}
+        onTouchEnd={handleTouchEnd}
+      >
+        <button
+          type="button"
+          className="hero-arrow-btn hero-arrow-btn--prev"
+          onClick={goToPreviousSlide}
+          aria-label="Show previous homepage message"
+        >
+          <ChevronLeft size={22} aria-hidden="true" />
+        </button>
+        <button
+          type="button"
+          className="hero-arrow-btn hero-arrow-btn--next"
+          onClick={goToNextSlide}
+          aria-label="Show next homepage message"
+        >
+          <ChevronRight size={22} aria-hidden="true" />
+        </button>
         <div className="container">
-          <div className="hero-content">
-            <div className="hero-eyebrow" aria-hidden="true">
-              <span className="hero-eyebrow-dot" />
-              {COMPANY.tagline}
+          <div className="hero-layout" key={currentSlide.id}>
+            <div className="hero-content">
+              <div className="hero-eyebrow">
+                <span className="hero-eyebrow-dot" />
+                {currentSlide.eyebrow}
+              </div>
+
+              <h1 id="hero-heading">
+                {currentSlide.heading}
+              </h1>
+
+              <p className="hero-description">
+                {currentSlide.description}
+              </p>
+
+              <div className="hero-ctas">
+                <Button to={currentSlide.primaryTo} variant="primary" size="lg">
+                  {currentSlide.primaryLabel}
+                </Button>
+                <Button to={currentSlide.secondaryTo} variant="secondary" size="lg">
+                  {currentSlide.secondaryLabel}
+                </Button>
+              </div>
+
             </div>
 
-            <h1 id="hero-heading">
-              Where{' '}
-              <span className="text-tech">Technology</span>
-              {' '}Meets{' '}
-              <span className="text-construction">Infrastructure</span>
-            </h1>
-
-            <p className="hero-description">
-              {COMPANY.position}
-            </p>
-
-            <div className="hero-ctas">
-              <Button to="/technology" variant="primary" size="lg">
-                Explore Technology
-              </Button>
-              <Button to="/construction" variant="secondary" size="lg">
-                Explore Construction
-              </Button>
+            <div className={`hero-visual hero-visual--${currentSlide.accent}`} aria-label={currentSlide.visualLabel}>
+              <img
+                src={currentSlide.image}
+                alt={currentSlide.imageAlt}
+                className="hero-visual-img"
+                loading={activeSlide === 0 ? 'eager' : 'lazy'}
+              />
+              <div className="hero-visual-caption">
+                <span className="hero-visual-dot" aria-hidden="true" />
+                {currentSlide.visualLabel}
+              </div>
             </div>
           </div>
+        </div>
+        <div className="hero-slide-controls" role="group" aria-label="Homepage hero messages">
+          {HERO_SLIDES.map((slide, index) => (
+            <button
+              key={slide.id}
+              type="button"
+              className={`hero-slide-control hero-slide-control--${slide.accent} ${activeSlide === index ? 'active' : ''}`}
+              onClick={() => setActiveSlide(index)}
+              aria-pressed={activeSlide === index}
+              aria-label={`Show ${slide.eyebrow} message`}
+            >
+              <span className="sr-only">{slide.eyebrow}</span>
+            </button>
+          ))}
         </div>
       </section>
 
@@ -104,17 +250,17 @@ export default function HomePage() {
               division="tech"
               icon={Cpu}
               title="First Minds Technologies"
-              description="Engineering intelligent digital systems — from machine learning analytics and custom web/mobile platforms to industrial IoT telemetry and automated enterprise workflows."
+              description="Website design and development, web applications, mobile applications, custom software, system development, digital platforms, automation, IoT, and technology integration."
               to="/technology"
-              features={['Artificial Intelligence & ML', 'Enterprise Software Engineering', 'Business Automation', 'IoT & Telemetry Solutions', 'Strategic IT Consulting']}
+              features={['Website & Web App Development', 'Mobile Application Development', 'Custom Software & Systems', 'Digital Platforms', 'Automation, IoT & Data Solutions']}
             />
             <DivisionCard
               division="construction"
               icon={HardHat}
               title="First Minds Construction"
-              description="Precision civil and structural engineering — delivering commercial facilities, housing developments, drainage networks, and arterial infrastructure built for generational endurance."
+              description="Residential construction, renovations, foundations, roofing, site works, civil works, and related construction delivery grounded in practical on-site execution."
               to="/construction"
-              features={['Commercial & Residential Construction', 'Architectural & BIM Design', 'Civil Works & Earthworks', 'Renovation & Retrofitting', 'Electrical, Solar & MEP Systems']}
+              features={['Residential Construction', 'Renovations & Retrofitting', 'Foundations & Roofing', 'Civil Works & Earthworks', 'Electrical, Solar & MEP Systems']}
             />
           </div>
         </div>
@@ -185,7 +331,7 @@ export default function HomePage() {
                     {project.summary}
                   </p>
                   <div style={{ marginTop: 'var(--space-4)', paddingTop: 'var(--space-3)', borderTop: '1px solid var(--color-border)' }}>
-                    <Button to="/projects" variant="secondary" size="sm" style={{ width: '100%' }}>
+                    <Button to={`/projects?division=${project.division}`} variant="secondary" size="sm" style={{ width: '100%' }}>
                       Explore Project &amp; Photos <ArrowRight size={14} aria-hidden="true" />
                     </Button>
                   </div>
@@ -233,3 +379,4 @@ export default function HomePage() {
     </>
   )
 }
+

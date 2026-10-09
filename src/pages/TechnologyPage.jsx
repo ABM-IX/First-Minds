@@ -25,17 +25,17 @@ export default function TechnologyPage() {
             First Minds Technologies
           </div>
           <h1 id="tech-heading">
-            Intelligent Software.<br />Real-World Performance.
+            Turning Technology Ideas Into Intelligent Solutions.
           </h1>
           <p className="division-hero-sub">
-            We engineer practical digital systems — custom enterprise platforms, machine learning pipelines, IoT telemetry, and automated workflows designed for robust operational impact.
+            From website design and development to web applications, mobile applications, custom software, system development, and digital platforms, First Minds builds practical technology around real needs.
           </p>
           <div className="hero-ctas">
             <Button to="/contact" variant="primary" size="lg">
               Consult an Engineer
             </Button>
             <Button to="/projects?division=tech" variant="secondary" size="lg">
-              Explore Tech Projects
+              View Technology Projects
             </Button>
           </div>
             </div>
@@ -62,7 +62,7 @@ export default function TechnologyPage() {
           <SectionHeader
             eyebrow="Specialized Capabilities"
             title="Technology Services"
-            subtitle="Architected for reliability, scalability, and seamless integration into mission-critical environments."
+            subtitle="Clear technology services for websites, web apps, mobile apps, custom systems, digital platforms, automation, IoT, and data-driven workflows."
             eyebrowColor="tech"
           />
 
@@ -123,3 +123,4 @@ export default function TechnologyPage() {
     </>
   )
 }
+

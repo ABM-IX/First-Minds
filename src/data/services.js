@@ -16,15 +16,15 @@ export const TECH_SERVICES = [
   },
   {
     icon: Code2,
-    title: 'Enterprise Software Engineering',
-    description: 'End-to-end software development from mission-critical web applications to distributed cloud architectures and scalable REST/GraphQL APIs.',
-    features: ['Web & mobile applications', 'API & microservices architecture', 'High-availability cloud engineering'],
+    title: 'Website, App & Software Development',
+    description: 'Website design and development, web application development, mobile application development, custom software, system development, and digital platform delivery.',
+    features: ['Websites & landing pages', 'Web and mobile applications', 'Custom systems & digital platforms'],
     division: 'technology'
   },
   {
     icon: Zap,
-    title: 'Workflow Automation',
-    description: 'Eliminate manual errors and repetitive operational overhead through integrated business process automation and RPA tools.',
+    title: 'Automation & Workflow Integration',
+    description: 'Automation and integration for repetitive workflows, business processes, forms, reports, and operational handoffs.',
     features: ['Process auditing & mapping', 'Robotic process automation (RPA)', 'Automated document processing'],
     division: 'technology'
   },
@@ -136,3 +136,4 @@ export const WHY_CONSTRUCTION = [
     desc: 'Deep knowledge of local geotechnical conditions, Botswana building standards, and environmental licensing protocols.' 
   }
 ]
+

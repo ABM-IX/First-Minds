@@ -24,17 +24,18 @@
 }
 
 .navbar-shell--solid {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 1px 0 var(--color-border), var(--shadow-sm);
+  background: rgba(255, 255, 255, 0.64);
+  backdrop-filter: blur(28px) saturate(165%);
+  -webkit-backdrop-filter: blur(28px) saturate(165%);
+  border-bottom: 1px solid rgba(221, 225, 231, 0.52);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.36), 0 14px 34px rgba(15, 27, 46, 0.08);
 }
 
 .navbar-shell--floating {
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(221, 225, 231, 0.72);
+  background: rgba(255, 255, 255, 0.56);
+  backdrop-filter: blur(32px) saturate(180%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  border-bottom: 1px solid rgba(221, 225, 231, 0.5);
   box-shadow: 0 12px 28px rgba(15, 27, 46, 0.08);
 }
 
@@ -162,7 +163,7 @@
 
 .navbar-link:hover {
   color: var(--color-navy);
-  background: var(--color-grey-light);
+  background: rgba(15, 27, 46, 0.08);
 }
 
 .navbar-link.active {
@@ -212,7 +213,7 @@
   transition: background var(--transition-fast);
 }
 
-.navbar-toggle:hover { background: var(--color-grey-light); }
+.navbar-toggle:hover { background: rgba(15, 27, 46, 0.08); }
 
 .navbar-toggle span {
   display: block;
@@ -236,8 +237,10 @@
   top: var(--navbar-height);
   left: 0;
   right: 0;
-  background: var(--color-white);
-  border-bottom: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border-bottom: 1px solid rgba(221, 225, 231, 0.58);
   padding: var(--space-3) var(--container-padding) var(--space-4);
   flex-direction: column;
   gap: var(--space-1);

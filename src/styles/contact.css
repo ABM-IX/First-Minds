@@ -5,8 +5,11 @@
 /* ---------- Contact Hero --------------------------------------------------- */
 .contact-hero {
   background: var(--color-navy);
-  padding-top: calc(var(--navbar-height) + var(--space-5));
-  padding-bottom: var(--space-7);
+  min-height: clamp(620px, 86vh, 900px);
+  padding-top: calc(var(--navbar-height) + var(--space-8));
+  padding-bottom: var(--space-8);
+  display: flex;
+  align-items: center;
   position: relative;
   overflow: hidden;
 }
@@ -437,8 +440,8 @@
 
 @media (max-width: 640px) {
   .contact-hero {
-    padding-top: calc(var(--navbar-height) + var(--space-4));
-    padding-bottom: var(--space-5);
+    min-height: clamp(620px, 88vh, 760px);
+    padding-block: calc(var(--navbar-height) + var(--space-6)) var(--space-6);
   }
 
   .contact-hero-sub {

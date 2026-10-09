@@ -8,13 +8,25 @@ import ScrollProgress from './ScrollProgress'
 import useSiteMotion from '../../hooks/useSiteMotion'
 
 export default function Layout() {
-  const { pathname } = useLocation()
+  const { hash, pathname } = useLocation()
   useSiteMotion()
 
   // Scroll to top on route change
   useEffect(() => {
+    if (hash) {
+      const targetId = hash.slice(1)
+      window.requestAnimationFrame(() => {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        document.getElementById(targetId)?.scrollIntoView({
+          block: 'start',
+          behavior: prefersReducedMotion ? 'auto' : 'smooth'
+        })
+      })
+      return
+    }
+
     window.scrollTo({ top: 0, behavior: 'auto' })
-  }, [pathname])
+  }, [hash, pathname])
 
   return (
     <>

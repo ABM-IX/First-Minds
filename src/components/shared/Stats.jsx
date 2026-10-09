@@ -1,7 +1,6 @@
 /**
  * Stats — row of key statistics
  * stats: Array<{ value: string, label: string }>
- * Note: All values are PLACEHOLDERS — replace with real data before launch.
  */
 export default function Stats({ stats, dark = false }) {
   return (
@@ -20,7 +19,6 @@ export default function Stats({ stats, dark = false }) {
             border: '1px solid rgba(255,255,255,0.1)'
           } : undefined}
         >
-          {/* PLACEHOLDER stat value — replace with verified real figures before launch */}
           <div
             className="stat-value"
             style={dark ? { color: 'var(--color-white)' } : undefined}
@@ -38,3 +36,4 @@ export default function Stats({ stats, dark = false }) {
     </div>
   )
 }
+
