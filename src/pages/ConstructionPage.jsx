@@ -32,10 +32,10 @@ export default function ConstructionPage() {
               </p>
               <div className="hero-ctas">
                 <Button to="/contact" variant="primary" size="lg">
-                  Commission a Project
+                  Start a Project
                 </Button>
                 <Button to="/projects" variant="secondary" size="lg">
-                  Explore Infrastructure
+                  Explore Our Work
                 </Button>
               </div>
             </div>
@@ -51,13 +51,13 @@ export default function ConstructionPage() {
                   />
                   <div className="division-hero-live-badge">
                     <span className="status-dot status-dot--complete" aria-hidden="true" />
-                    <span>On-Site Supervision &amp; Engineering</span>
+                    <span>Construction Division</span>
                   </div>
                 </div>
 
                 <div className="division-hero-card-meta">
-                  <div className="division-hero-leader-name">Construction Leadership</div>
-                  <div className="division-hero-leader-role">Director of Civil &amp; Structural Engineering</div>
+                  <div className="division-hero-leader-name">Construction Division</div>
+                  <div className="division-hero-leader-role">Project Leadership &amp; Delivery</div>
                   <div className="division-hero-leader-tag">First Minds Construction Division • Botswana</div>
                   <p className="division-hero-quote">
                     "Every foundation, rebar grid, and structural wall is personally inspected on-site to exceed quality standards."
@@ -140,9 +140,9 @@ export default function ConstructionPage() {
             }}
           >
             <img
-              src="https://images.unsplash.com/photo-1541888086225-c6b75c138804?auto=format&fit=crop&q=80&w=1400"
-              alt="First Minds infrastructure construction project in Botswana"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              src="/images/construction-team.jpg"
+              alt="First Minds construction team on a Botswana project site"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
               loading="lazy"
             />
           </div>

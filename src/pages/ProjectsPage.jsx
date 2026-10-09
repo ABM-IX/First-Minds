@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { HardHat, Cpu, MapPin, CheckCircle, Info, User, ArrowRight, Eye } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
 import Button from '../components/shared/Button'
@@ -11,6 +11,7 @@ import '../styles/projects.css'
 export default function ProjectsPage() {
   const [filter, setFilter] = useState('all')
   const [selectedProject, setSelectedProject] = useState(null)
+  const [heroImageIndex, setHeroImageIndex] = useState(0)
 
   const filteredProjects = PROJECTS.filter(project => {
     if (filter === 'all') return true
@@ -20,6 +21,23 @@ export default function ProjectsPage() {
   const techCount = PROJECTS.filter(p => p.division === 'tech').length
   const constCount = PROJECTS.filter(p => p.division === 'construction').length
   const openProject = (project) => setSelectedProject(project)
+  const heroImages = useMemo(() => (
+    PROJECTS
+      .filter(project => project.division === 'construction')
+      .flatMap(project => project.images?.length ? project.images : [project.image])
+      .filter(Boolean)
+      .slice(0, 18)
+  ), [])
+
+  useEffect(() => {
+    if (heroImages.length < 2) return undefined
+
+    const intervalId = window.setInterval(() => {
+      setHeroImageIndex((current) => (current + 1) % heroImages.length)
+    }, 4200)
+
+    return () => window.clearInterval(intervalId)
+  }, [heroImages.length])
 
   return (
     <main className="projects-page">
@@ -32,17 +50,40 @@ export default function ProjectsPage() {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="projects-hero section-padding">
+      <section
+        className="projects-hero section-padding"
+        style={{ '--projects-hero-bg': heroImages.length > 0 ? `url(${heroImages[heroImageIndex]})` : undefined }}
+      >
         <div className="container">
-          <div className="hero-content">
-            <span className="hero-eyebrow">
-              <span className="hero-eyebrow-dot"></span>
-              Verified Portfolio
-            </span>
-            <h1>Real Projects. Built for Botswana.</h1>
-            <p className="hero-description">
-              Browse our authentic residential builds, commercial infrastructure, and real-time digital transit platforms. Each development represents verified on-site engineering and rigorous execution.
-            </p>
+          <div className="projects-hero-grid">
+            <div className="hero-content">
+              <span className="hero-eyebrow">
+                <span className="hero-eyebrow-dot"></span>
+                Verified Portfolio
+              </span>
+              <h1>Real Projects. Built for Botswana.</h1>
+              <p className="hero-description">
+                Browse our authentic residential builds, commercial infrastructure, and real-time digital transit platforms. Each development represents verified on-site engineering and rigorous execution.
+              </p>
+            </div>
+
+            {heroImages.length > 0 && (
+              <div className="projects-hero-slideshow" aria-label="Rotating photos from First Minds construction projects">
+                {heroImages.map((image, index) => (
+                  <img
+                    key={image}
+                    src={image}
+                    alt=""
+                    className={`projects-hero-slide ${index === heroImageIndex ? 'active' : ''}`}
+                    aria-hidden="true"
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                  />
+                ))}
+                <div className="projects-hero-photo-count">
+                  Project Photo {heroImageIndex + 1} of {heroImages.length}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>

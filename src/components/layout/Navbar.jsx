@@ -20,6 +20,10 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [headerState, setHeaderState] = useState(() => {
+    if (typeof window === 'undefined') return 'top'
+    return window.scrollY < 24 ? 'top' : 'floating'
+  })
   const location = useLocation()
 
   // Determine which division/context we are in
@@ -56,7 +60,43 @@ export default function Navbar() {
     setMenuOpen(false)
   }, [location.pathname])
 
-  const navShellClass = 'navbar-shell navbar-shell--solid'
+  useEffect(() => {
+    let lastY = window.scrollY
+    let ticking = false
+
+    const updateHeader = () => {
+      const currentY = window.scrollY
+      const delta = currentY - lastY
+      const nearTop = currentY < 24
+
+      if (nearTop) {
+        setHeaderState('top')
+      } else if (Math.abs(delta) > 8) {
+        setHeaderState(delta > 0 ? 'hidden' : 'floating')
+        lastY = currentY
+      }
+
+      ticking = false
+    }
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateHeader)
+        ticking = true
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  const navShellClass = [
+    'navbar-shell',
+    'navbar-shell--solid',
+    headerState === 'hidden' && !menuOpen ? 'navbar-shell--hidden' : '',
+    headerState !== 'top' || menuOpen ? 'navbar-shell--floating' : ''
+  ].filter(Boolean).join(' ')
 
   return (
     <>

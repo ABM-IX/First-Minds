@@ -18,6 +18,8 @@ export default function TechnologyPage() {
       <section className="division-hero division-hero--tech section-navy" aria-labelledby="tech-heading">
         <div className="division-hero-accent" aria-hidden="true" />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+          <div className="division-hero-grid">
+            <div className="division-hero-content">
           <div className="division-hero-badge">
             <Brain size={14} aria-hidden="true" />
             First Minds Technologies
@@ -35,6 +37,21 @@ export default function TechnologyPage() {
             <Button to="/projects" variant="secondary" size="lg">
               Explore Tech Projects
             </Button>
+          </div>
+            </div>
+
+            <div className="division-hero-profile-pane">
+              <div className="division-hero-card">
+                <div className="division-hero-card-media">
+                  <img
+                    src="/images/ABM.png"
+                    alt="First Minds Technologies professional engineering leadership"
+                    className="division-hero-card-img"
+                    loading="eager"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

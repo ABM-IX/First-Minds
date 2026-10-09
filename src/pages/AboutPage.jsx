@@ -31,11 +31,24 @@ export default function AboutPage() {
       {/* ── PAGE HERO ─────────────────────────────────────────────────── */}
       <section className="about-hero section-navy" aria-labelledby="about-heading">
         <div className="container">
-          <span className="page-header-eyebrow">Our Company</span>
-          <h1 id="about-heading">Built on Purpose.<br />Driven by Solutions.</h1>
-          <p className="about-hero-sub">
-            {COMPANY.position}
-          </p>
+          <div className="about-hero-grid">
+            <div className="about-hero-content">
+              <span className="page-header-eyebrow">About First Minds</span>
+              <h1 id="about-heading">Built from Experience.<br />Driven by What Comes Next.</h1>
+              <p className="about-hero-sub">
+                First Minds is a Botswana-based company built on a foundation of construction and expanding into technology. We bring practical experience, engineering thinking and digital capability together to create solutions for the physical and digital world.
+              </p>
+            </div>
+
+            <div className="about-hero-visual" aria-hidden="true">
+              <img
+                src="/images/About.png"
+                alt=""
+                className="about-hero-img"
+                loading="eager"
+              />
+            </div>
+          </div>
         </div>
       </section>
 

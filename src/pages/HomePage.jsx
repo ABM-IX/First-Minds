@@ -4,12 +4,18 @@ import Button from '../components/shared/Button'
 import SectionHeader from '../components/shared/SectionHeader'
 import DivisionCard from '../components/shared/DivisionCard'
 import CTASection from '../components/shared/CTASection'
+import CountUpStat from '../components/shared/CountUpStat'
 import { COMPANY } from '../data/company'
 import { CAPABILITIES, PROCESS_STEPS } from '../data/capabilities'
 import { PROJECTS } from '../data/projects'
 
 export default function HomePage() {
   const featuredProjects = PROJECTS.slice(0, 2)
+  const metrics = [
+    { value: 18, suffix: '+', label: 'Projects Delivered' },
+    { value: 2, label: 'Integrated Divisions' },
+    { value: 1, label: 'Botswana Headquarters' }
+  ]
 
   return (
     <>
@@ -69,11 +75,13 @@ export default function HomePage() {
             </div>
 
             <div className="who-we-are-stats">
-              {COMPANY.stats.map(({ value, label }) => (
-                <div key={label} className="stat-item">
-                  <div className="stat-value">{value}</div>
-                  <div className="stat-label">{label}</div>
-                </div>
+              {metrics.map(({ value, suffix, label }) => (
+                <CountUpStat
+                  key={label}
+                  value={value}
+                  suffix={suffix}
+                  label={label}
+                />
               ))}
             </div>
           </div>

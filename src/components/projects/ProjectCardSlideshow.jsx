@@ -57,7 +57,7 @@ export default function ProjectCardSlideshow({ images = [], title = '', status =
         {status && (
           <div className="project-status-badge">
             <span 
-              className={`status-dot ${status.toLowerCase().includes('progress') ? 'status-dot--progress' : 'status-dot--complete'}`} 
+              className={`status-dot ${status.toLowerCase().includes('progress') || status.toLowerCase().includes('development') ? 'status-dot--progress' : 'status-dot--complete'}`} 
               aria-hidden="true"
             />
             <span>{status}</span>

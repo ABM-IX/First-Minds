@@ -76,7 +76,7 @@ export default function ProjectDetailModal({ project, onClose }) {
               {isTech ? <Cpu size={14} aria-hidden="true" /> : <HardHat size={14} aria-hidden="true" />}
               {isTech ? 'Technology Division' : 'Construction Division'}
             </span>
-            <span className={`project-status-chip ${project.status.toLowerCase().includes('progress') ? 'project-status-chip--progress' : 'project-status-chip--complete'}`}>
+            <span className={`project-status-chip ${project.status.toLowerCase().includes('progress') || project.status.toLowerCase().includes('development') ? 'project-status-chip--progress' : 'project-status-chip--complete'}`}>
               <span className="status-dot" aria-hidden="true" />
               {project.status}
             </span>

@@ -11,6 +11,51 @@ const SUBJECTS = [
   'General Enquiry'
 ]
 
+const CONTACT_ENQUIRIES_STORAGE_KEY = 'firstMindsContactEnquiries'
+const WEB3FORMS_ACCESS_KEY = '6fb833d0-b36a-4b25-b207-93ead9ce11b4'
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
+const MAIL_SUBJECT = 'Project enquiry for First Minds'
+const MAIL_BODY = `Hello ${COMPANY.shortName},
+
+I would like to make an enquiry about:
+
+`
+const CONTACT_MAILTO = `mailto:${COMPANY.contact.emailGeneral}?subject=${encodeURIComponent(MAIL_SUBJECT)}&body=${encodeURIComponent(MAIL_BODY)}`
+
+const getStoredEnquiries = () => {
+  try {
+    const storedEnquiries = JSON.parse(window.localStorage.getItem(CONTACT_ENQUIRIES_STORAGE_KEY) || '[]')
+    return Array.isArray(storedEnquiries) ? storedEnquiries : []
+  } catch {
+    return []
+  }
+}
+
+const createWeb3FormsPayload = (enquiry) => {
+  const formData = new FormData()
+  formData.append('access_key', WEB3FORMS_ACCESS_KEY)
+  formData.append('subject', `[${enquiry.subject}] Project enquiry from ${enquiry.firstName} ${enquiry.lastName}`)
+  formData.append('from_name', `${enquiry.firstName} ${enquiry.lastName}`)
+  formData.append('name', `${enquiry.firstName} ${enquiry.lastName}`)
+  formData.append('email', enquiry.email)
+  formData.append('phone', enquiry.phone || 'Not provided')
+  formData.append('enquiry_subject', enquiry.subject)
+  formData.append('reference', enquiry.id)
+  formData.append('submitted_at', enquiry.submittedAt)
+  formData.append('message', [
+    `Name: ${enquiry.firstName} ${enquiry.lastName}`,
+    `Email: ${enquiry.email}`,
+    `Phone: ${enquiry.phone || 'Not provided'}`,
+    `Subject: ${enquiry.subject}`,
+    `Reference: ${enquiry.id}`,
+    '',
+    'Message:',
+    enquiry.message
+  ].join('\n'))
+
+  return formData
+}
+
 export default function ContactPage() {
   const [form, setForm] = useState({
     firstName: '',
@@ -68,11 +113,42 @@ export default function ContactPage() {
     setServerError(null)
 
     try {
-      // Simulate enterprise submission network latency
+      const enquiry = {
+        id: `FM-${Date.now()}`,
+        submittedAt: new Date().toISOString(),
+        status: 'sent',
+        ...form,
+        firstName: form.firstName.trim(),
+        lastName: form.lastName.trim(),
+        email: form.email.trim(),
+        phone: form.phone.trim(),
+        message: form.message.trim()
+      }
+
+      const response = await fetch(WEB3FORMS_ENDPOINT, {
+        method: 'POST',
+        body: createWeb3FormsPayload(enquiry)
+      })
+      const data = await response.json()
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || 'Your enquiry could not be sent. Please try again.')
+      }
+
+      try {
+        window.localStorage.setItem(
+          CONTACT_ENQUIRIES_STORAGE_KEY,
+          JSON.stringify([enquiry, ...getStoredEnquiries()])
+        )
+        window.dispatchEvent(new CustomEvent('firstminds:contact-enquiry-registered', { detail: enquiry }))
+      } catch {
+        // Email delivery already succeeded; local browser storage is only a convenience.
+      }
+
       await new Promise((resolve) => setTimeout(resolve, 900))
       setSubmitted(true)
-    } catch {
-      setServerError('An unexpected network error occurred while transmitting your request. Please retry or contact us directly via phone or email.')
+    } catch (error) {
+      setServerError(error instanceof Error ? error.message : 'Your enquiry could not be sent. Please retry or contact us directly via phone or email.')
     } finally {
       setLoading(false)
     }
@@ -126,31 +202,6 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="contact-hero-profile-pane">
-              <div className="contact-hero-card">
-                <div className="contact-hero-card-media">
-                  <img
-                    src="/images/ABM.png"
-                    alt="Arabang (ABM) — Founder and Principal Systems Engineer at First Minds"
-                    className="contact-hero-card-img"
-                    loading="eager"
-                  />
-                  <div className="contact-hero-live-badge">
-                    <span className="status-dot status-dot--complete" aria-hidden="true" />
-                    <span>Direct Advisory Available</span>
-                  </div>
-                </div>
-
-                <div className="contact-hero-card-meta">
-                  <div className="contact-hero-name">Arabang B. M.</div>
-                  <div className="contact-hero-role">Founder &amp; Principal Systems Engineer</div>
-                  <div className="contact-hero-org">First Minds (Pty) Ltd • Botswana</div>
-                  <p className="contact-hero-quote">
-                    "From conceptual architecture to active on-site deployment, we partner directly with our clients at every milestone."
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -192,7 +243,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <div className="contact-info-label">Corporate Email</div>
-                      <a href={`mailto:${COMPANY.contact.emailGeneral}`} className="contact-info-value" aria-label={`Email ${COMPANY.name}`}>
+                      <a href={CONTACT_MAILTO} className="contact-info-value" aria-label={`Email ${COMPANY.name}`}>
                         {COMPANY.contact.emailGeneral}
                       </a>
                     </div>
@@ -221,7 +272,7 @@ export default function ContactPage() {
             </aside>
 
             {/* Form Container */}
-            <div className="contact-form-container card-base">
+            <div id="contact-form" className="contact-form-container card-base">
               {submitted ? (
                 /* Success State Contract */
                 <div 
@@ -234,10 +285,10 @@ export default function ContactPage() {
                     <CheckCircle size={36} aria-hidden="true" />
                   </div>
                   <h2 style={{ fontSize: 'var(--text-3xl)', color: 'var(--color-navy)', marginBottom: 'var(--space-2)' }}>
-                    Message Dispatched Successfully
+                    Enquiry Sent Successfully
                   </h2>
                   <p style={{ color: 'var(--color-grey-dark)', maxWidth: '480px', margin: '0 auto var(--space-6)', lineHeight: 1.6 }}>
-                    Thank you, <strong style={{ color: 'var(--color-navy)' }}>{form.firstName}</strong>. Your enquiry regarding <strong style={{ color: 'var(--color-navy)' }}>{form.subject}</strong> has been transmitted to our project team. We will review the details and reach out via <strong>{form.email}</strong>.
+                    Thank you, <strong style={{ color: 'var(--color-navy)' }}>{form.firstName}</strong>. Your enquiry has been sent to <strong>{COMPANY.contact.emailGeneral}</strong>. Our team will reply using <strong>{form.email}</strong>.
                   </p>
                   <button
                     type="button"
@@ -414,12 +465,12 @@ export default function ContactPage() {
                       {loading ? (
                         <>
                           <RefreshCw size={18} className="animate-spin" aria-hidden="true" />
-                          <span>Transmitting Enquiry...</span>
+                          <span>Sending Enquiry...</span>
                         </>
                       ) : (
                         <>
                           <Send size={18} aria-hidden="true" />
-                          <span>Transmit Project Enquiry</span>
+                          <span>Send Project Enquiry</span>
                         </>
                       )}
                     </button>

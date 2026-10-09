@@ -5,9 +5,11 @@ import Footer from './Footer'
 import Loader from './Loader'
 import ScrollToTop from './ScrollToTop'
 import ScrollProgress from './ScrollProgress'
+import useSiteMotion from '../../hooks/useSiteMotion'
 
 export default function Layout() {
   const { pathname } = useLocation()
+  useSiteMotion()
 
   // Scroll to top on route change
   useEffect(() => {

@@ -68,10 +68,10 @@ export const COMPANY = {
   // Contact Information
   contact: {
     address: 'Plot 5919, Kopong, Botswana',
-    phone: '+267 72 717 212',
-    phoneRaw: '+26772717212',
-    email: 'info@firstminds.co.bw',
-    emailGeneral: 'firstminds@gmail.com',
+    phone: '+267 73 201 214',
+    phoneRaw: '+26773201214',
+    email: 'admin@firstminds.co.bw',
+    emailGeneral: 'admin@firstminds.co.bw',
     hours: 'Monday – Friday: 08:00 – 17:00 CAT',
     mapCoordinates: { lat: -24.4926, lng: 25.8927 }
   },
