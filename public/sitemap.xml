@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://firstminds.com/</loc>
+    <loc>https://firstminds.co.bw/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://firstminds.com/about</loc>
+    <loc>https://firstminds.co.bw/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://firstminds.com/technology</loc>
+    <loc>https://firstminds.co.bw/technology</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://firstminds.com/construction</loc>
+    <loc>https://firstminds.co.bw/construction</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://firstminds.com/projects</loc>
+    <loc>https://firstminds.co.bw/projects</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://firstminds.com/contact</loc>
+    <loc>https://firstminds.co.bw/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
