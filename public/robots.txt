@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://firstminds.com/sitemap.xml
+Sitemap: https://firstminds.co.bw/sitemap.xml
